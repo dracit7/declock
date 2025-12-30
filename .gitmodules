@@ -1,0 +1,21 @@
+[submodule "vendor/rib"]
+	path = vendor/rib
+	url = https://ipads.se.sjtu.edu.cn:1312/weixd/rib
+[submodule "vendor/r2"]
+	path = vendor/r2
+	url = https://ipads.se.sjtu.edu.cn:1312/weixd/r2
+	branch = master
+[submodule "vendor/junction"]
+	path = vendor/junction
+	url = https://github.com/preshing/junction
+[submodule "vendor/turf"]
+	path = vendor/turf
+	url = https://github.com/preshing/turf
+[submodule "app/sherman"]
+	path = app/sherman
+	url = https://ipads.se.sjtu.edu.cn:1312/chengk/sherman
+	branch = dmlock
+
+[submodule "lock/shiftlock"]
+	path = lock/shiftlock
+	url = https://ipads.se.sjtu.edu.cn:1312/zhanghanze/shiftlock.git
