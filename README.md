@@ -6,6 +6,27 @@ memory node (MN) accesses of lock operations to avoid MN-NIC IOPS
 contention with data accesses, while preserving strong fairness
 between readers and writers acquiring the lock.
 
+## Key Components
+
+This section briefly illustrates the key components in the codebase to aid
+understanding and tweaking the implementation.
+
+### Configurations
+
+There are some static configurations defined in `include/sconf.h`.
+Dynamic configurations are defined in `lib/conf.h` and are controlled by environment variables.
+
+### DecLock implementation
+
+The core designs of DecLock (CQL and TS-based hierarchical locking) are
+implemented in `lock/dmlock`.
+
+- `lm.h`: Defines CQL lock data structures (the lock header and lock queues).
+- `remote.cc`: Implements CQL lock operations (`remote_rw_lock|remote_rw_unlock`).
+- `cohort.cc|.h`: Defines local lock structures and implements local lock operations.
+- `lc.cc`: Combines local lock and CQL lock operations to facilitate TS-based hierarchical locking.
+- `lc.h`: Defines DecLock's APIs.
+
 ## Hardware Requirements
 
 The experiments require at least two machines (physical or virtual) 
@@ -96,7 +117,7 @@ bash getresults.sh [testname] [lock_mechanism] [all|run|data] [args]
 
 For most tests, `lock_mechanism` is one of `caslock|dslr|shiftlock|dmlock_tf|dmlock`.
 
-Supported tests includes:
+Supported tests include:
 - Microbenchmark (Fig.12 and Fig.13):
   1. testname=`intra-cn`
   2. testname=`inter-cn`
@@ -120,3 +141,8 @@ Supported tests includes:
   + NoSQL store: testname=`store`
   + Transaction: testname=`txn`
   + DB index (Sherman): testname=`sherman`
+
+Supported functions include:
+- `run`: spawns workers to perform the experiments and caches raw results locally.
+- `data`: parses cached raw results and generates plottable results to REPORT_PATH.
+- `all`: executes `run` and `data` sequentially.
