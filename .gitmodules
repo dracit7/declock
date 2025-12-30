@@ -15,7 +15,6 @@
 	path = app/sherman
 	url = https://ipads.se.sjtu.edu.cn:1312/chengk/sherman
 	branch = dmlock
-
 [submodule "lock/shiftlock"]
 	path = lock/shiftlock
 	url = https://ipads.se.sjtu.edu.cn:1312/zhanghanze/shiftlock.git
